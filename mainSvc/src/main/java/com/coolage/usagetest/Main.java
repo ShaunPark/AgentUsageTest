@@ -75,7 +75,7 @@ public class Main {
 		for( int i = 0 ; i < info.getSubcall() ; i++  ) {
 			HttpCaller c = new HttpCaller();
 			c.setMessage("" + i);
-			c.setUrl("http://" + info.getTargetHost() + (String)prop.get("targeturl"));
+			c.setUrl("http://" + info.getTargetHost());
 			jobs.add(c);
 		}
 		
