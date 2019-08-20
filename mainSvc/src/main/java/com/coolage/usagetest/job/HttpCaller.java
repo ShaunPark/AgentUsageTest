@@ -22,19 +22,13 @@ public class HttpCaller extends Job {
 	 
 	        //get 메서드와 URL 설정
 	        logger.info("Send message to url");
-	        HttpGet httpGet = new HttpGet(url);
+	        String targetUrl = url;
+	        HttpGet httpGet = new HttpGet(targetUrl);
 	 
-	        //agent 정보 설정
-	        //httpGet.addHeader("User-Agent", USER_AGENT);
-	        
 	        //get 요청
 	        CloseableHttpResponse httpResponse = httpClient.execute(httpGet);
 	        
-//	        System.out.println("::GET Response Status::");
-//	        
-//	        //response의 status 코드 출력
-//	        System.out.println(httpResponse.getStatusLine().getStatusCode());
-	 
+ 
 	        BufferedReader reader = new BufferedReader(new InputStreamReader(
 	                httpResponse.getEntity().getContent()));
 	 
