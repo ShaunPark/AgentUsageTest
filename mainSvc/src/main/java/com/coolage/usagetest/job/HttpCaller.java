@@ -23,7 +23,9 @@ public class HttpCaller extends Job {
 	        //get 메서드와 URL 설정
 	        logger.info("Send message to url");
 	        String targetUrl = url;
+	        
 	        HttpGet httpGet = new HttpGet(targetUrl);
+	        httpGet.addHeader("Host", "localhost");
 	 
 	        //get 요청
 	        CloseableHttpResponse httpResponse = httpClient.execute(httpGet);
