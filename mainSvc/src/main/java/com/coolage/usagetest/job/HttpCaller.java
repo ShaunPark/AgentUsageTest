@@ -3,6 +3,7 @@ package com.coolage.usagetest.job;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+import org.apache.http.HttpHeaders;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -25,7 +26,7 @@ public class HttpCaller extends Job {
 	        String targetUrl = url;
 	        
 	        HttpGet httpGet = new HttpGet(targetUrl);
-	        httpGet.addHeader("Host", "localhost");
+	        httpGet.setHeader(HttpHeaders.HOST, "localhost");
 	 
 	        //get 요청
 	        CloseableHttpResponse httpResponse = httpClient.execute(httpGet);
