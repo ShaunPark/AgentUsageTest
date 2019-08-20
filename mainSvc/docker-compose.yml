@@ -17,7 +17,4 @@ services:
       - "/var/run/docker.sock:/tmp/docker.sock:ro"
     # Listens on port 80, accessed by our host on http://localhost
     ports:
-      - "8080:80"
-    environment:
-      VIRTUAL_PORT: '8080'
-    
+      - "8080:80"    

@@ -21,6 +21,3 @@ services:
     # Listens on port 80, accessed by our host on http://localhost
     ports:
       - "8080:80"
-    environment:
-      VIRTUAL_PORT: '8080'
-    
