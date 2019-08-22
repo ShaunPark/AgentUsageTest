@@ -32,6 +32,7 @@ public class HttpCaller extends Job {
 		try {
 		    try (CloseableHttpClient httpClient = HttpClients.custom()
 		                                                     .setConnectionManager(connectionManager)
+		                                                     .setConnectionManagerShared(true)
 		                                                     .build()) {
 		        final HttpGet httpGet = new HttpGet(url);
 		        httpGet.setHeader(HttpHeaders.HOST, "localhost");
