@@ -43,7 +43,7 @@ public class Main {
 		});
 	}
 	
-	private String process(Request req, Response resreq) {
+	private String process(Request req, Response res) {
 		count++;
 		if( count > 100000 ) {
 			count = 0;
@@ -51,6 +51,7 @@ public class Main {
 		
 		int delay = 100;
 		String delayStr = req.params("delay");
+		logger.info("delayStr " + delayStr);
 		if (delayStr != null && !delayStr.isBlank()) {
 			try {
 				delay = Integer.parseInt(delayStr);
