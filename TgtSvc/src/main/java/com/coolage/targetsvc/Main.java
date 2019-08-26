@@ -17,23 +17,23 @@ public class Main {
 
 	private void execute() {
 		Spark.port(8080);
-		Spark.get("/requset_0", (req, res) -> {
+		Spark.get("/request_0", (req, res) -> {
 			return process(req,res);
 		}
 		);
-		Spark.get("/requset_1", (req, res) -> {
+		Spark.get("/request_1", (req, res) -> {
 			return process(req,res);
 		}
 		);
-		Spark.get("/requset_2", (req, res) -> {
+		Spark.get("/request_2", (req, res) -> {
 			return process(req,res);
 		}
 		);
-		Spark.get("/requset_3", (req, res) -> {
+		Spark.get("/request_3", (req, res) -> {
 			return process(req,res);
 		}
 		);
-		Spark.get("/requset_4", (req, res) -> {
+		Spark.get("/request_4", (req, res) -> {
 			return process(req,res);
 		}
 		);
