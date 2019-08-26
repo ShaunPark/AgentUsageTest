@@ -15,6 +15,7 @@ public class Main {
 		m.execute();
 	}
 
+	private static int count = 0;
 	private void execute() {
 		Spark.port(8080);
 		Spark.get("/request_0", (req, res) -> {
@@ -43,6 +44,11 @@ public class Main {
 	}
 	
 	private String process(Request req, Response resreq) {
+		count++;
+		if( count > 100000 ) {
+			count = 0;
+		}
+		
 		int delay = 100;
 		String delayStr = req.params("delay");
 		if (delayStr != null && !delayStr.isBlank()) {
@@ -62,7 +68,9 @@ public class Main {
 			Thread.sleep(pause);
 		} catch (InterruptedException e) {
 		}
-		//logger.info("Pause  " + pause + "ms");
+		if( (count % 50) == 0) {
+			logger.info("Pause  " + pause + "ms");
+		}
 		return "Call Success!!";
 
 	}
