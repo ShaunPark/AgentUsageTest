@@ -32,7 +32,7 @@ public class Main {
 				pause = (int)(Math.random() * delay) + 10;
 			}
 			Thread.sleep(pause);
-			logger.info("Pause  " + pause + "ms");
+			//logger.info("Pause  " + pause + "ms");
 			return "Call Success!!";
 		});
 	}

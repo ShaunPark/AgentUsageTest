@@ -94,7 +94,7 @@ public class Main {
 
 		Collections.shuffle(jobs);
 		
-		jobs.forEach( item -> System.out.println(item.toString()) );
+		//jobs.forEach( item -> System.out.println(item.toString()) );
 
 		return jobs;
 	}
