@@ -1,5 +1,7 @@
 package com.coolage.targetsvc;
 
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -49,9 +51,13 @@ public class Main {
 			count = 0;
 		}
 		
-		int delay = 100;
+		int delay = 10;
+		Map<String, String> ps = req.params();
+		for( String p : ps.keySet()) {
+			logger.info(p);
+		}
 		String delayStr = req.params("delay");
-		logger.info("delayStr " + delayStr);
+		//logger.info("delayStr " + delayStr);
 		if (delayStr != null && !delayStr.isBlank()) {
 			try {
 				delay = Integer.parseInt(delayStr);
