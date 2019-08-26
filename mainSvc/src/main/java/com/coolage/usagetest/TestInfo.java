@@ -7,6 +7,8 @@ public class TestInfo {
 	public String sqlType;
 	public boolean errInSubcall;
 	public String targetHost;
+	public String urlParam;
+	
 //	public int targetPort;
 //	public String targetUrl;
 	
@@ -46,6 +48,13 @@ public class TestInfo {
 	public void setTargetHost(String targetHost) {
 		this.targetHost = targetHost;
 	}
+	public String getUrlParam() {
+		return urlParam;
+	}
+	public void setUrlParam(String urlParam) {
+		this.urlParam = urlParam;
+	}
+	
 //	public int getTargetPort() {
 //		return targetPort;
 //	}

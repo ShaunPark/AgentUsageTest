@@ -17,6 +17,7 @@ public class HttpCaller extends Job {
 //	private String host;
 //	private int port;
 	private String url;
+	private String param;
 	
 	private static PoolingHttpClientConnectionManager connectionManager = null;
 	public HttpCaller() {
@@ -34,7 +35,11 @@ public class HttpCaller extends Job {
 		                                                     .setConnectionManager(connectionManager)
 		                                                     .setConnectionManagerShared(true)
 		                                                     .build()) {
-		        final HttpGet httpGet = new HttpGet(url);
+		    	String rUrl = url.trim() + "_" + (this.getJobIdx() % 5);
+		    	if( !param.isBlank()) {
+		    		rUrl = rUrl + "?" + param.trim();
+		    	}
+		        final HttpGet httpGet = new HttpGet(rUrl);
 		        httpGet.setHeader(HttpHeaders.HOST, "localhost");
 		        try (CloseableHttpResponse httpResponse = httpClient.execute(httpGet)) {
 			        BufferedReader reader = new BufferedReader(new InputStreamReader(
@@ -50,42 +55,6 @@ public class HttpCaller extends Job {
 			        reader.close();
 		        }
 		    }
-			
-//			BasicHttpClientConnectionManager connManager
-//			 = new BasicHttpClientConnectionManager();
-//			HttpRoute route = new HttpRoute(new HttpHost(host, port));
-//			ConnectionRequest connRequest = connManager.requestConnection(route, null);
-//			
-//			//http client 생성
-//	        CloseableHttpClient httpClient =  HttpClients.custom().setConnectionManager(connManager).build();
-//	 
-//	        //get 메서드와 URL 설정
-//	        logger.info("Send message to url");
-//	        String targetUrl = url;
-//	        
-//	        HttpGet httpGet = new HttpGet(targetUrl);
-//	        httpGet.setHeader(HttpHeaders.HOST, "localhost");
-//	 
-//	        //get 요청
-//	        CloseableHttpResponse httpResponse = httpClient.execute(httpGet);
-//	        
-// 
-//	        BufferedReader reader = new BufferedReader(new InputStreamReader(
-//	                httpResponse.getEntity().getContent()));
-//	 
-//	        String inputLine;
-//	        StringBuffer response = new StringBuffer();
-//	 
-//	        while ((inputLine = reader.readLine()) != null) {
-//	            response.append(inputLine);
-//	        }
-//	        
-//	        reader.close();
-//	 
-//	        //Print result
-//	        System.out.println(response.toString());
-//	        httpClient.close();
-			// TODO Auto-generated method stub
 			return 0;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -97,5 +66,8 @@ public class HttpCaller extends Job {
 	}
 	public void setUrl(String url) {
 		this.url = url;
+	}
+	public void setParam(String param) {
+		this.param = param;
 	}
 }
