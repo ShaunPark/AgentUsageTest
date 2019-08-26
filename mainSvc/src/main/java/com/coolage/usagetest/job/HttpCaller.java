@@ -36,7 +36,7 @@ public class HttpCaller extends Job {
 		                                                     .setConnectionManagerShared(true)
 		                                                     .build()) {
 		    	String rUrl = url.trim() + "_" + (this.getJobIdx() % 5);
-		    	if( !param.isBlank()) {
+		    	if( param != null && !param.isBlank()) {
 		    		rUrl = rUrl + "?" + param.trim();
 		    	}
 		        final HttpGet httpGet = new HttpGet(rUrl);

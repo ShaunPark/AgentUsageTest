@@ -76,6 +76,7 @@ public class Main {
 			HttpCaller c = new HttpCaller();
 			c.setMessage("" + i);
 			c.setJobIdx(i);
+			c.setParam(info.getUrlParam());
 			c.setUrl("http://" + info.getTargetHost());
 			jobs.add(c);
 		}
