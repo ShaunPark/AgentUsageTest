@@ -52,12 +52,8 @@ public class Main {
 		}
 		
 		int delay = 10;
-		Map<String, String> ps = req.params();
-		for( String p : ps.keySet()) {
-			logger.info(p);
-		}
-		String delayStr = req.params("delay");
-		//logger.info("delayStr " + delayStr);
+		String delayStr = req.queryParams("delay");
+
 		if (delayStr != null && !delayStr.isBlank()) {
 			try {
 				delay = Integer.parseInt(delayStr);
