@@ -1,5 +1,6 @@
 import mysql.connector
 import random
+import json
 
 from datetime import datetime
 from flask import Flask, request
@@ -17,32 +18,50 @@ class Job:
         self.index = index
 
 class Http(Job):
+    pool = ''
     url = ''
     param = ''
         
     def execute(self):
-        pool = HTTPConnectionPool(self.targetHost, maxsize=100)
-        urlStr = url + '_' + str(index % 5)
-        if param != '':
-            urlStr = urlStr + '?' + param
-        pool.request('GET', urlStr)
-                
+        urlStr = self.url #+ '_' + str(index % 5)
+        if self.param != '':
+            urlStr = urlStr + '?' + self.param
+        self.pool.request('GET', urlStr)
+
+
 @app.route('/request', methods=['POST'])
-def request():
+def procReq():
+    #print(request.content_type)
+    #print(request.data)
     job = []
+    #data = json.loads(request.data, strict=False) 
     data = request.get_json(force=True)
     subcall = data['subcall']
-    for i in range(subcall):
+    
+    strs = data['targetHost'].split('/')
+    hoststr = strs[0].split(':')
+    host =hoststr[0]
+    port = 80
+    if len(hoststr) == 2 :
+        port = int(hoststr[1])
+        
+    pool = HTTPConnectionPool(host=host, port=port, maxsize=100)
+
+    for i in range(int(subcall)):
         http = Http()
         http.url = "http://" + data['targetHost']
         http.index = i
+        http.pool = pool
         http.param = data['urlParam']
         job.append(http)
-    
+        
     random.shuffle(job)
     
     for j in job:
-        j.execute()        
+        j.execute()   
+        
+    return "Call success"
+
     
 @app.route('/insert')
 def insertData():
@@ -80,4 +99,4 @@ def insertData():
             print("MySQL connection is closed")
 
 if __name__ == '__main__':
-    app.run(host= '0.0.0.0', port=8080)
+    app.run(host= '0.0.0.0', port=8080, debug=True)
