@@ -76,8 +76,7 @@ public class Main {
 			HttpCaller c = new HttpCaller();
 			c.setMessage("" + i);
 			c.setJobIdx(i);
-			c.setParam(info.getUrlParam());
-			c.setUrl("http://" + info.getTargetHost());
+			c.setInfo(info);
 			jobs.add(c);
 		}
 		
@@ -89,7 +88,7 @@ public class Main {
 		
 		for( int i = 0 ; i < info.getSqls() ; i++  ) {
 			DatabaseCaller c = new DatabaseCaller();
-			c.setUrl((String)prop.get("db.connect.url"));
+//			c.setUrl((String)prop.get("db.connect.url"));
 			jobs.add(c);
 		}
 

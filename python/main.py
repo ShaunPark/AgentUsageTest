@@ -39,21 +39,22 @@ def procReq():
     data = request.get_json(force=True)
     subcall = data['subcall']
     
-    strs = data['targetHost'].split('/')
-    hoststr = strs[0].split(':')
-    host =hoststr[0]
-    port = 80
-    if len(hoststr) == 2 :
-        port = int(hoststr[1])
+    
+    host = data.get('targetHost','')
+    portStr = data.get('targetPort', '80')
+    url = data.get('targetUrl', '/')
+    param = data.get('urlParam', '')
+
+    port = int(portStr)
         
-    pool = HTTPConnectionPool(host=host, port=port, maxsize=100, headers={'Host': 'localhost'})
+    pool = HTTPConnectionPool(host=host, port=port, maxsize=100, headers={'Host':'localhost'})
 
     for i in range(int(subcall)):
         http = Http()
-        http.url = "http://" + data['targetHost']
+        http.url = url
         http.index = i
         http.pool = pool
-        http.param = data['urlParam']
+        http.param = param
         job.append(http)
         
     random.shuffle(job)

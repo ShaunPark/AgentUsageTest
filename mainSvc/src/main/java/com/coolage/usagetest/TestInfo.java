@@ -7,11 +7,9 @@ public class TestInfo {
 	public String sqlType;
 	public boolean errInSubcall;
 	public String targetHost;
+	public int targetPort;
+	public String targetUrl;
 	public String urlParam;
-	
-//	public int targetPort;
-//	public String targetUrl;
-	
 	public int getSubcall() {
 		return subcall;
 	}
@@ -48,6 +46,18 @@ public class TestInfo {
 	public void setTargetHost(String targetHost) {
 		this.targetHost = targetHost;
 	}
+	public int getTargetPort() {
+		return targetPort;
+	}
+	public void setTargetPort(int targetPort) {
+		this.targetPort = targetPort;
+	}
+	public String getTargetUrl() {
+		return targetUrl;
+	}
+	public void setTargetUrl(String targetUrl) {
+		this.targetUrl = targetUrl;
+	}
 	public String getUrlParam() {
 		return urlParam;
 	}
@@ -55,16 +65,5 @@ public class TestInfo {
 		this.urlParam = urlParam;
 	}
 	
-//	public int getTargetPort() {
-//		return targetPort;
-//	}
-//	public void setTargetPort(int targetPort) {
-//		this.targetPort = targetPort;
-//	}
-//	public String getTargetUrl() {
-//		return targetUrl;
-//	}
-//	public void setTargetUrl(String targetUrl) {
-//		this.targetUrl = targetUrl;
-//	}
+	
 }

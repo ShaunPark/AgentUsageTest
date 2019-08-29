@@ -14,10 +14,6 @@ import org.slf4j.LoggerFactory;
 
 public class HttpCaller extends Job {
 	Logger logger = LoggerFactory.getLogger(HttpCaller.class);
-//	private String host;
-//	private int port;
-	private String url;
-	private String param;
 	
 	private static PoolingHttpClientConnectionManager connectionManager = null;
 	public HttpCaller() {
@@ -35,9 +31,9 @@ public class HttpCaller extends Job {
 		                                                     .setConnectionManager(connectionManager)
 		                                                     .setConnectionManagerShared(true)
 		                                                     .build()) {
-		    	String rUrl = url.trim() + "_" + (this.getJobIdx() % 5);
-		    	if( param != null && !param.isBlank()) {
-		    		rUrl = rUrl + "?" + param.trim();
+		    	String rUrl = "http://" + info.targetHost.trim() + ":" + info.targetPort + info.targetUrl.trim() + "_" + (this.getJobIdx() % 5);
+		    	if( info.urlParam != null && !info.urlParam.isBlank()) {
+		    		rUrl = rUrl + "?" + info.urlParam.trim();
 		    	}
 		        final HttpGet httpGet = new HttpGet(rUrl);
 		        httpGet.setHeader(HttpHeaders.HOST, "localhost");
@@ -60,14 +56,5 @@ public class HttpCaller extends Job {
 			e.printStackTrace();
 			return -1;
 		}
-	}
-	public String getUrl() {
-		return url;
-	}
-	public void setUrl(String url) {
-		this.url = url;
-	}
-	public void setParam(String param) {
-		this.param = param;
 	}
 }
