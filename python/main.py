@@ -12,6 +12,7 @@ from urllib3 import HTTPConnectionPool
 app = Flask(__name__)
 FlaskJSON(app)
 
+
 class Job:
     index = 0
     def setIndex(self, index):
