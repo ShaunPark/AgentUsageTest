@@ -2,3 +2,4 @@ Flask
 Flask-JSON
 mysql-connector-python
 urllib3
+instana
