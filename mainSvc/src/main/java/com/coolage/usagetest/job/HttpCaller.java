@@ -20,7 +20,7 @@ public class HttpCaller extends Job {
 		if( connectionManager == null ) {
 			connectionManager = new PoolingHttpClientConnectionManager();
 		}
-	    connectionManager.setMaxTotal(500);
+	    connectionManager.setMaxTotal(1000);
 	    connectionManager.setDefaultMaxPerRoute(20);
 
 	}
