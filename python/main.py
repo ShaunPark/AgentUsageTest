@@ -33,7 +33,7 @@ class Http(Job):
 @app.route('/request', methods=['POST'])
 def procReq():
     #print(request.content_type)
-    #print(request.data)
+    print('request from ' + request.remote_addr)
     job = []
     #data = json.loads(request.data, strict=False) 
     data = request.get_json(force=True)
