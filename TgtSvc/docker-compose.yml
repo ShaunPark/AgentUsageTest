@@ -10,7 +10,7 @@ services:
     depends_on:
       - nginx
     environment:
-      VIRTUAL_HOST: 'TESTTARGET'
+      VIRTUAL_HOST: 'localhost'
     
   
   nginx:

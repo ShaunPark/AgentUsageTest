@@ -27,7 +27,7 @@ class Http(Job):
         urlStr = self.url #+ '_' + str(index % 5)
         if self.param != '':
             urlStr = urlStr + '?' + self.param
-        self.pool.request('GET', urlStr, headers={'Host': 'TESTTARGET'})
+        self.pool.request('GET', urlStr, headers={'Host': 'localhost'})
 
 
 @app.route('/request', methods=['POST'])
