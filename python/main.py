@@ -27,7 +27,7 @@ class Http(Job):
         urlStr = self.url #+ '_' + str(index % 5)
         if self.param != '':
             urlStr = urlStr + '?' + self.param
-        self.pool.request('GET', urlStr, headers={"Host": "localhost"})
+        self.pool.request('GET', urlStr)
 
 
 @app.route('/request', methods=['POST'])
@@ -46,7 +46,7 @@ def procReq():
     if len(hoststr) == 2 :
         port = int(hoststr[1])
         
-    pool = HTTPConnectionPool(host=host, port=port, maxsize=100)
+    pool = HTTPConnectionPool(host=host, port=port, maxsize=100,headers={"Host": "localhost"})
 
     for i in range(int(subcall)):
         http = Http()
