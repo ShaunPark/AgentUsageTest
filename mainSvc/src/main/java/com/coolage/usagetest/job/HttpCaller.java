@@ -40,7 +40,7 @@ public class HttpCaller extends Job {
 		    		rUrl = rUrl + "?" + param.trim();
 		    	}
 		        final HttpGet httpGet = new HttpGet(rUrl);
-		        httpGet.setHeader(HttpHeaders.HOST, "localhost");
+		        httpGet.setHeader(HttpHeaders.HOST, "TESTTARGET");
 		        try (CloseableHttpResponse httpResponse = httpClient.execute(httpGet)) {
 			        BufferedReader reader = new BufferedReader(new InputStreamReader(
 			                httpResponse.getEntity().getContent()));
