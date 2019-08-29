@@ -24,7 +24,7 @@ class Http(Job):
     param = ''
         
     def execute(self):
-        urlStr = self.url + '_' + str(index % 5)
+        urlStr = self.url + '_' + str(self.index % 5)
         if self.param != '':
             urlStr = urlStr + '?' + self.param
         self.pool.request('GET', urlStr, headers={'Host': 'localhost'})
