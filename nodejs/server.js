@@ -41,7 +41,7 @@ function shuffle(array) {
 }
 
 function httpJob(url) {
-    //console.log('httpJob - ' + url);
+    console.log('httpJob - ' + url);
     http.get(url, (resp) => {
     })
     .on("error", (err) => {
