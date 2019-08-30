@@ -40,15 +40,6 @@ function shuffle(array) {
   return array;
 }
 
-function httpJob(url) {
-    console.log('httpJob - ' + url);
-    http.get(url, (resp) => {
-    })
-    .on("error", (err) => {
-        console.log("Error: " + err.message);
-    });
-}
-
 function logJob(message) {
     console.log(message);
 }
@@ -60,7 +51,11 @@ app.post('/request', (req, res) => {
     var jobs = [];
     for( var i = 0 ; i < info.subcall ; i++ ) {
         var url = info.targetUrl;
-        jobs.push({'type':'http', 'url': 'http://'+info.targetHost + ':'+ info.targetPort + (url.startsWith('/')?'':'/') + url + '_' +(i%5)});
+        jobs.push({'type':'http',
+                   'options': { 'host':info.targetHost, 'port':info.targetPort,
+                                'path':(url.startsWith('/')?'':'/') + url + '_' +(i%5), 
+                                'headers':{'Host':'localhost'}}
+                  });
     }
     
     for( var i = 0 ; i < info.logMessages; i++ ) {
@@ -71,7 +66,7 @@ app.post('/request', (req, res) => {
     
     jobs.forEach((job) =>{
         switch(job.type) {
-            case 'http':httpJob(job.url); break;
+            case 'http':http.request(job.options); break;
             case 'log':logJob(job.message); break;
         }
     });
