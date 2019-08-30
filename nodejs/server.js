@@ -44,11 +44,13 @@ function shuffle(array) {
 
 function httpJob(options) {
 //    console.log('httpJob - ' + options);
-    http.get(options, (resp) => {
-    })
-    .on("error", (err) => {
-        console.log("Error: " + err.message);
-    });
+    return new Promise(function(resolve, reject) {
+        http.get(options, (resp) => {
+        })
+        .on("error", (err) => {
+            console.log("Error: " + err.message);
+        })
+    }
 }
 
 function logJob(message) {
@@ -79,7 +81,7 @@ app.post('/request', (req, res) => {
     
     jobs.forEach((job) =>{
         switch(job.type) {
-            case 'http':httpJob(job.options); break;
+            case 'http':httpJob(job.options).then(); break;
             case 'log':logJob(job.message); break;
         }
     });
