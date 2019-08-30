@@ -43,7 +43,7 @@ function shuffle(array) {
 }
 
 function httpJob(options) {
-    console.log('httpJob - ' + options);
+//    console.log('httpJob - ' + options);
     http.get(options, (resp) => {
     })
     .on("error", (err) => {
@@ -57,8 +57,8 @@ function logJob(message) {
 
 app.post('/request', (req, res) => {
     info = req.body;
-    console.log(info);
-    console.log(info.subcall);
+//    console.log(info);
+//    console.log(info.subcall);
     var jobs = [];
     for( var i = 0 ; i < info.subcall ; i++ ) {
         var url = info.targetUrl;
