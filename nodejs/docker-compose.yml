@@ -1,0 +1,20 @@
+version: '3.0'
+services:
+  mainsvc:
+    build: .
+    image: mainnode:latest
+    expose:
+      - "8080"
+    depends_on:
+      - nginx
+    environment:
+      VIRTUAL_HOST: 'localhost'
+  
+  nginx:
+    image: jwilder/nginx-proxy
+    volumes:
+      # It needs to access Docker's API, so we mount the Unix socket
+      - "/var/run/docker.sock:/tmp/docker.sock:ro"
+    # Listens on port 80, accessed by our host on http://localhost
+    ports:
+      - "8080:80"    
