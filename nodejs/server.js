@@ -52,7 +52,7 @@ app.post('/request', (req, res) => {
     for( var i = 0 ; i < info.subcall ; i++ ) {
         var url = info.targetUrl;
         jobs.push({'type':'http',
-                   'options': { 'host':info.targetHost, 'port':info.targetPort,
+                   'options': { 'method': 'GET', 'host':info.targetHost, 'port':info.targetPort,
                                 'path':(url.startsWith('/')?'':'/') + url + '_' +(i%5), 
                                 'headers':{'Host':'localhost'}}
                   });
@@ -66,7 +66,7 @@ app.post('/request', (req, res) => {
     
     jobs.forEach((job) =>{
         switch(job.type) {
-            case 'http':http.request(job.options); break;
+            case 'http':http.request(job.options, ); break;
             case 'log':logJob(job.message); break;
         }
     });
