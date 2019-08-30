@@ -42,19 +42,44 @@ function shuffle(array) {
   return array;
 }
 
-function httpJob(options) {
-//    console.log('httpJob - ' + options);
-    return new Promise(function(resolve, reject) {
-        http.get(options, (resp) => {
-        })
-        .on("error", (err) => {
-            console.log("Error: " + err.message);
-        });
-    });
+function getPromise(options) {
+	return new Promise((resolve, reject) => {
+		http.get(options, (response) => {
+			let chunks_of_data = [];
+
+//			response.on('data', (fragments) => {
+//				chunks_of_data.push(fragments);
+//			});
+
+			response.on('end', () => {
+				let response_body = Buffer.concat(chunks_of_data);
+				resolve(response_body.toString());
+			});
+
+			response.on('error', (error) => {
+				reject(error);
+			});
+		});
+	});
 }
 
 function logJob(message) {
     console.log(message);
+}
+
+// async function which will wait for the HTTP request to be finished
+async function httpJob(options) {
+	try {
+		let http_promise = getPromise(options);
+		let response_body = await http_promise;
+
+		// holds response from server that is passed when Promise is resolved
+		console.log(response_body);
+	}
+	catch(error) {
+		// Promise rejected
+		console.log(error);
+	}
 }
 
 app.post('/request', (req, res) => {
@@ -81,7 +106,7 @@ app.post('/request', (req, res) => {
     
     jobs.forEach((job) =>{
         switch(job.type) {
-            case 'http':httpJob(job.options).then(); break;
+            case 'http':httpJob(job.options); break;
             case 'log':logJob(job.message); break;
         }
     });
