@@ -1,12 +1,14 @@
-require('@instana/collector')();
+require('@instana/collector')({tracing: {
+        enabled: true
+    }});
 // init tracing
 // MUST be done before loading anything else!
-instana({
-    tracing: {
-        enabled: true
-    }
-});
-
+//instana({
+//    tracing: {
+//        enabled: true
+//    }
+//});
+//
 const http = require('http')
 const express = require('express');
 const app = express();
