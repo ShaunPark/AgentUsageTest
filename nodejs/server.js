@@ -50,7 +50,7 @@ function httpJob(options) {
         .on("error", (err) => {
             console.log("Error: " + err.message);
         });
-    };
+    });
 }
 
 function logJob(message) {
